@@ -6,7 +6,11 @@
 
 {!! Form::model($post, ['method'=>'PATCH', 'action'=> ['AdminPostsController@update', $post->id], 'files'=>true]) !!}
 
-    <div class="form-group">
+<div class="col-sm-3">
+    <img class="img-responsive img-rounded" src="{{$post->photo ? URL::to('/') . $post->photo->file : 'http://via.placeholder.com/350x150'}}" alt="test" >
+</div>
+<div class="col-sm-9">
+    <div class="form-group ">
         {!! Form::label('title', 'Title:') !!}
         {!! Form::text('title', null, ['class'=>'form-control']) !!}
     </div>
@@ -29,7 +33,7 @@
     <div class="form-group">
         {!! Form::submit('Edit Post', ['class'=>'btn btn-primary col-sm-2']) !!}
     </div>
-
+</div>
 {!! Form::close() !!}
 
 {!! Form::open(['method' => 'DELETE', 'action'=> ['AdminPostsController@destroy', $post->id]]) !!}
