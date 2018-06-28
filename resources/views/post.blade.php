@@ -72,6 +72,7 @@
 
                 @if(count($comment->replies) > 0)
                     @foreach($comment->replies as $reply)
+                        @if($reply->is_active == 1)
                         <!-- Nested Comment -->
                         <div class="media">
                             <a class="pull-left" href="#">
@@ -85,22 +86,26 @@
                             </div>
                         </div>  
                     <!-- End Nested Comment -->
+                    @endif
                     @endforeach
-                    {!! Form::open(['method'=>'POST', 'action'=> 'CommentRepliesController@store']) !!}
                     
-                            <input type="hidden" name="comment_id" value="{{$comment->id}}">
-                    
-                            <div class="form-group ">
-                                {!! Form::label('body', 'Body:') !!}
-                                {!! Form::textarea('body', null, ['class'=>'form-control', 'rows'=>5]) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::submit('Add Comment', ['class'=>'btn btn-primary']) !!}
-                            </div>
-                        {!! Form::close() !!}
-                @endif                
+                @endif      
+                {!! Form::open(['method'=>'POST', 'action'=> 'CommentRepliesController@store']) !!}
+                
+                        <input type="hidden" name="comment_id" value="{{$comment->id}}">
+                
+                        <div class="form-group ">
+                            {!! Form::label('body', 'Body:') !!}
+                            {!! Form::textarea('body', null, ['class'=>'form-control', 'rows'=>5]) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::submit('Add Comment', ['class'=>'btn btn-primary']) !!}
+                        </div>
+                    {!! Form::close() !!}          
             </div>
+            
         </div>
+        
     @endforeach
 @endif
 
